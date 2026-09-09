@@ -21,15 +21,8 @@ class SRRADetector(nn.Module):
 
     def build_backbone(self):
 
-        # clip_model = CLIPModel.from_pretrained("/")
-        # Download CLIP model using the below link
-        # https://drive.google.com/drive/folders/1fm3Jd8lFMiSP1qgdmsxfqlJZGpr_bXsx?usp=drive_link
-
-        clip_model = CLIPModel.from_pretrained("/home/tjut_liuhuakun/project/Effort-AIGI-Detection-main"
-                                               "/DeepfakeBench/training/weights/models--openai--clip-vit-large-patch14")  # the path of this folder in your disk (download from the above link)
-
+        clip_model = CLIPModel.from_pretrained("/")
         clip_model.vision_model = apply_svd_residual_to_self_attn(clip_model.vision_model, r=1024 - 1)
-
         return clip_model.vision_model
 
     def features(self, data_dict: dict) -> torch.tensor:
@@ -270,8 +263,8 @@ if __name__ == '__main__':
     from PIL import Image
 
     # image_path = '/home/tjut_liuhuakun/project/Effort-AIGI-Detection-main/DeepfakeBench/img.png'
-    image_path = '../../img.png'
-    weights_path = '/home/tjut_liuhuakun/project/Effort-AIGI-Detection-main/DeepfakeBench/training/weights/ckpt_best.pth'
+    image_path = 'img.png'
+    weights_path = '/'
     device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
     # 1. 加载模型
@@ -281,10 +274,7 @@ if __name__ == '__main__':
     model.eval()
 
     # 2. 读取图片并进行 CLIP 预处理
-    processor = AutoProcessor.from_pretrained(
-        "/home/tjut_liuhuakun/project/Effort-AIGI-Detection-main/"
-        "DeepfakeBench/training/weights/models--openai--clip-vit-large-patch14"
-    )
+    processor = AutoProcessor.from_pretrained("/")
 
     image = Image.open(image_path).convert('RGB')
     image = processor(images=image, return_tensors='pt')['pixel_values'].to(device)
