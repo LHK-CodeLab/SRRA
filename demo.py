@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
 from sklearn import metrics
-
+from PIL import Image
 from transformers import AutoProcessor, CLIPModel
 
 
@@ -260,32 +260,26 @@ def replace_with_svd_residual(module, r):
 
 
 if __name__ == '__main__':
-    from PIL import Image
 
-    # image_path = '/home/tjut_liuhuakun/project/Effort-AIGI-Detection-main/DeepfakeBench/img.png'
     image_path = 'img.png'
     weights_path = '/'
     device = torch.device('cuda:1' if torch.cuda.is_available() else 'cpu')
 
-    # 1. 加载模型
     model = SRRADetector().to(device)
     ckpt = torch.load(weights_path, map_location=device)
     model.load_state_dict(ckpt, strict=True)
     model.eval()
 
-    # 2. 读取图片并进行 CLIP 预处理
     processor = AutoProcessor.from_pretrained("/")
 
     image = Image.open(image_path).convert('RGB')
     image = processor(images=image, return_tensors='pt')['pixel_values'].to(device)
 
-    # 3. 推理
     with torch.no_grad():
         output = model({'image': image})
         prob = torch.softmax(output['cls'], dim=1)
         pred = torch.argmax(prob, dim=1).item()
 
-    # 4. 输出
     print('Real probability:', prob[0, 0].item())
     print('Fake probability:', prob[0, 1].item())
     print('Prediction:', 'Fake' if pred == 1 else 'Real')
