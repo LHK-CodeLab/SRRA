@@ -12,7 +12,7 @@ SRRA is a parameter-efficient fine-tuning strategy for generalizable deepfake de
 Subspace Orthogonalization (RSO)**, are further introduced to suppress excessive perturbation and improve cross-domain generalization.
 
 <p align="center">
-  <img src="overview.pdf" width="90%">
+  <img src="overview.png" width="90%">
 </p>
 
 ## Results
