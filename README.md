@@ -2,7 +2,7 @@
 
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-brightgreen.svg)](https://creativecommons.org/licenses/by-nc/4.0/) ![PyTorch](https://img.shields.io/badge/PyTorch-1.12-brightgreen) ![Python](https://img.shields.io/badge/Python-3.8+-brightgreen)
 
-**ECCV 2026**
+**🎉 **Accepted by ECCV 2026****
 
 ## 🎯 Overview
 
