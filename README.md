@@ -11,7 +11,9 @@ Official implementation of **SRRA: Stable-Rank-Based Residual Adaptation for Gen
 SRRA is a parameter-efficient fine-tuning strategy for generalizable deepfake detection. It decomposes pretrained ViT attention weights into a frozen principal component and a trainable residual component, and adaptively determines the residual rank using the stable rank of each weight matrix. Two regularizers, **Residual Energy Constraint (REC)** and **Residual
 Subspace Orthogonalization (RSO)**, are further introduced to suppress excessive perturbation and improve cross-domain generalization.
 
-
+<p align="center">
+  <img src="SRRA_overview.pdf" width="90%">
+</p>
 
 ## Results
 
