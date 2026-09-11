@@ -19,7 +19,7 @@ class SRRADetector(nn.Module):
         self.prob, self.label = [], []
         self.correct, self.total = 0, 0
 
-    def build_backbone(self):
+    def build_backbone(self, config):
 
         clip_model = CLIPModel.from_pretrained("/")
         clip_model.vision_model = apply_svd_residual_to_self_attn(clip_model.vision_model, r=1024 - 1)
